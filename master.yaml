@@ -58,6 +58,14 @@ Resources:
                 SecurityGroup: !GetAtt SecurityGroups.Outputs.ECSHostSecurityGroup
                 Subnets: !GetAtt VPC.Outputs.PrivateSubnets
 
+    RDS:
+        Type: AWS::CloudFormation::Stack
+        Properties:
+            TemplateURL: https://s3-eu-west-1.amazonaws.com/ish-scv-infra/infrastructure/postgres.yaml
+            Parameters:
+                NetworkStackName: !GetAtt VPC.Outputs.VPC
+                DatabasePassword: test1234ZXY
+
     ProductService:
         Type: AWS::CloudFormation::Stack
         Properties:
